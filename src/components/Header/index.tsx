@@ -1,10 +1,10 @@
 import React from 'react';
-import './Header.css';
+import styles from './Header.css';
 
 function Header({ headerText = 'Bench Test' }: { headerText?: string }) {
   return (
-    <div className='header'>
-      <h1 className='header-text'>{headerText}</h1>
+    <div className={styles.header}>
+      <h1 className={styles.headerText}>{headerText}</h1>
     </div>
   );
 }

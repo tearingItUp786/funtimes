@@ -1,9 +1,29 @@
 import React from 'react';
-import { useInfiniteQuery, useQuery } from 'react-query';
+import { useInfiniteQuery, UseInfiniteQueryResult } from 'react-query';
+import { DateService, NumberService } from '~services/locale-service';
 import { getData } from '../services/axios-service';
 
-function useGetData() {
-  const query = useInfiniteQuery(
+/**
+ * Had to hack the type system since react-query doesn't give a real nice way
+ * of overriding the data attributes
+ */
+type Custom = {
+  totalCount: number;
+  flatData: Transaction[];
+  dollarAmount: number;
+};
+type HackType = UseInfiniteQueryResult<ApiPayload, unknown> & {
+  data: {
+    custom?: Custom;
+  };
+};
+
+function useGetData(): {
+  isDoneFetching: boolean;
+  totalMoney?: string;
+  query: HackType;
+} {
+  const realQuery = useInfiniteQuery(
     ['DATA'],
     ({ pageParam = 1 }) => getData(pageParam),
     {
@@ -14,22 +34,36 @@ function useGetData() {
           ...data,
           custom: data.pages?.reduce(
             (acc, curr) => {
+              let dollarAmount = acc.dollarAmount;
               return {
                 totalCount: curr.totalCount,
-                flatData: [...acc.flatData, ...curr.transactions],
+                flatData: [
+                  ...acc.flatData,
+                  ...curr.transactions?.map((o) => {
+                    dollarAmount += Number(o.Amount);
+                    return {
+                      ...o,
+                      _formatted: {
+                        date: DateService.getDate(o.Date),
+                        currency: NumberService.getCurrencyNumber(o.Amount),
+                      },
+                    };
+                  }),
+                ],
+                dollarAmount,
               };
             },
-            { totalCount: 0, flatData: [] }
+            { totalCount: 0, flatData: [], dollarAmount: 0 }
           ),
         };
       },
     }
   );
+  const query = realQuery as HackType;
 
   React.useEffect(() => {
     if (query.data) {
       const {
-        // @ts-ignore
         custom: { totalCount, flatData },
       } = query.data;
       if (flatData.length !== totalCount) {
@@ -41,10 +75,11 @@ function useGetData() {
   return {
     query,
     isDoneFetching:
-      // @ts-ignore
       query?.data?.custom &&
-      // @ts-ignore
       query?.data?.custom?.totalCount === query?.data.custom?.flatData?.length,
+    totalMoney: NumberService.getCurrencyNumber(
+      query?.data?.custom?.dollarAmount
+    ),
   };
 }
 

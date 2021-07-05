@@ -12,4 +12,4 @@ const ContextApp = () => {
   );
 };
 
-render(<App />, document.getElementById('app'));
+render(<ContextApp />, document.getElementById('app'));

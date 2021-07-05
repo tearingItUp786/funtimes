@@ -1,0 +1,41 @@
+.table {
+  width: 100%;
+  background: white;
+  border-radius: 4px;
+  position: relative;
+}
+
+.table thead {
+  z-index: 1000;
+  position: sticky;
+  top: 0;
+}
+
+.headerRow {
+  background-color: white;
+  padding: 16px;
+  text-align: left;
+  font-weight: 400;
+  color: var(--brandColor);
+  border-bottom: solid 1px var(--gray);
+  position: sticky;
+  top: 0;
+}
+
+.headerRow th {
+  font-family: var(--fontFamily);
+  font-weight: 600;
+}
+
+.dataRow {
+  padding: 16px;
+  border-bottom: solid 1px var(--gray);
+}
+
+.dataRow:nth-child(even) {
+  color: var(--brandColor);
+}
+
+.dataRow:last-child {
+  border-bottom: none;
+}

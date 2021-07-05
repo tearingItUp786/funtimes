@@ -1,6 +1,7 @@
 import React from 'react';
 import { Column } from 'react-table';
-import { useTable } from 'react-table';
+import { useTable, useFlexLayout } from 'react-table';
+import styles from './Table.css';
 
 interface OurTable<D extends object> {
   columns: Column<D>[];
@@ -8,20 +9,23 @@ interface OurTable<D extends object> {
 }
 
 function Table<D extends object>({ columns, data }: OurTable<D>) {
-  const tableInstance = useTable({ columns, data });
+  const tableInstance = useTable<D>({ columns, data }, useFlexLayout);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;
 
   return (
     // apply the table props
-    <table {...getTableProps()}>
+    <table className={styles.table} {...getTableProps()}>
       <thead>
         {
           // Loop over the header rows
           headerGroups.map((headerGroup) => (
             // Apply the header row props
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr
+              {...headerGroup.getHeaderGroupProps()}
+              className={styles.headerRow}
+            >
               {
                 // Loop over the headers in each row
                 headerGroup.headers.map((column) => (
@@ -47,7 +51,7 @@ function Table<D extends object>({ columns, data }: OurTable<D>) {
             prepareRow(row);
             return (
               // Apply the row props
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps()} className={styles.dataRow}>
                 {
                   // Loop over the rows cells
                   row.cells.map((cell) => {

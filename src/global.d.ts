@@ -1,3 +1,7 @@
+declare module '*.css' {
+  const classes: { [key: string]: string };
+  export default classes;
+}
 type ApiPayload = {
   totalCount: number;
   page: number;
@@ -9,4 +13,8 @@ type Transaction = {
   Ledger: string;
   Amount: string;
   Company: string;
+  _formatted?: {
+    date?: string;
+    currency?: string;
+  };
 };

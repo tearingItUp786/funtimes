@@ -1,0 +1,13 @@
+.dataTableContainer {
+  padding: 32px;
+  background-color: var(--gray);
+  overflow: auto;
+}
+
+.spinContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 70vh;
+}

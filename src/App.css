@@ -1,4 +1,5 @@
 :root {
+  --gray: rgba(0, 0, 0, 0.15);
   --brandColor: rgb(9, 139, 140);
   --bodyColor: rgb(47, 48, 52);
   --fontFamily: LLCircularWeb, Helvetica Neue, Helvetica, Arial, Lucida Grande,

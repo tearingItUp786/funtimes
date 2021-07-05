@@ -5,9 +5,9 @@
     "module": "ES2020",
     "lib": ["DOM", "ES2019"],
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "~*": ["./*"]
+      "~*": ["./src/*"]
     }
   },
   "exclude": ["node_modules"],
