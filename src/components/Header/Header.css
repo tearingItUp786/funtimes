@@ -1,0 +1,12 @@
+.header {
+  background-color: var(--brandColor);
+  padding: 32px 0px;
+  text-align: center;
+}
+
+.header-text {
+  color: white;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}

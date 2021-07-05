@@ -1,0 +1,27 @@
+:root {
+  --brandColor: rgb(9, 139, 140);
+  --bodyColor: rgb(47, 48, 52);
+  --fontFamily: LLCircularWeb, Helvetica Neue, Helvetica, Arial, Lucida Grande,
+    sans-serif;
+}
+html {
+  font-family: var(--fontFamily);
+  font-size: 14px;
+}
+
+body {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+p {
+  font-weight: 400;
+}

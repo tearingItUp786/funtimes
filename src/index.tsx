@@ -1,5 +1,15 @@
-function add(x: number, y: number) {
-	return x + y;
-}
+import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { render } from 'react-dom';
+import App from './App';
 
-console.log(add(1, 1))
+const ContextApp = () => {
+  const queryClient = new QueryClient();
+  return (
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
+  );
+};
+
+render(<App />, document.getElementById('app'));
