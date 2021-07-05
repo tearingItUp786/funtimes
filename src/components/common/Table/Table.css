@@ -5,12 +5,6 @@
   position: relative;
 }
 
-.table thead {
-  z-index: 1000;
-  position: sticky;
-  top: 0;
-}
-
 .headerRow {
   background-color: white;
   padding: 16px;
